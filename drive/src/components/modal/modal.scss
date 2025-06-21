@@ -1,0 +1,33 @@
+.modal {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    background: rgba(0, 0, 0, .7);
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modal-body {
+        position: relative;
+        //background-color: var(--primary-color);
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 40%;
+
+        .close {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+        }
+
+
+    }
+}
