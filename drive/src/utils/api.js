@@ -1,5 +1,3 @@
-import Upload from "../components/upload/upload";
-
 const url="http://192.168.0.7:3001/";
 
 const api={

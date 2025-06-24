@@ -71,8 +71,11 @@ section {
         flex-direction: column;
 
         aside {
+            flex: none;
             ul {
                 display: flex;
+                justify-content: space-around;
+                align-items: center;
                 flex-wrap: wrap;
                 margin: auto 15px;
                 padding: 0px;

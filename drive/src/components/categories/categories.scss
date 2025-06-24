@@ -84,3 +84,27 @@
     object-fit: contain;
     width: 500px;
 }
+
+@media only screen and (max-width:600px) {
+
+    .c_images:hover,
+    .c_documents:hover,
+    .c_video:hover,
+    .c_audio:hover,
+    .c_Others:hover {
+        .cover,
+        .tooltip {
+            display: none;
+        }
+    }
+    .Cards{
+        background-color:var(--secondary-color);
+        padding:10px;
+        border-radius:10px;
+        span{
+            margin-top:10px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+    }
+}

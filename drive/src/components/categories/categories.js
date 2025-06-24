@@ -7,21 +7,77 @@ import { FaCloudDownloadAlt } from "react-icons/fa";
 import Modal from "../modal/modal";
 import axios from "axios";
 import api from "../../utils/api";
+import { useRef, useState } from "react";
 
 const url = api.files;
 
 const Categories = ({ type, src }) => {
+    const [info, setInfo] = useState(false)
+    const longPress = LongPress(() => setInfo(true));
+    const download = async (e) => {
+        e.stopPropagation();
+        const response = await axios.get(url + src.name, { responseType: 'blob' });
+        const blob = new Blob([response.data]);
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = src.actualName;
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+    const trash = async (e) => {
+        e.stopPropagation();
+        var response = await axios.delete(api.delete + src._id + "/" + src.name, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        if (response.status === 200) {
+            alert("Deleted Succesfully");
+            window.location.reload();
+        }
+    }
+    const Card = () => <div className="Cards">
+        <div>{src.actualName}</div>
+        <span><FaCloudDownloadAlt onClick={download} color="white" size={35} /><IoTrashBin onClick={trash} color="white" size={35} /></span>
+    </div>
+    const Info = () => <Modal
+        trigger={<div></div>}
+        element={<Card />}
+        inital={info}
+        callback={(e) => setInfo(false)}
+    />
     switch (type) {
         case "images":
-            return <Images src={src} />
+            return <div {...longPress}><Images src={src} /><Info /></div>
         case "documents":
-            return <Documents src={src} />
+            return <div {...longPress}><Documents src={src} /><Info /></div>
         case "videos":
-            return <Video src={src} />
+            return <div {...longPress}><Video src={src} /><Info /></div>
         case "audio":
-            return <Audio src={src} />
+            return <div {...longPress}><Audio src={src} /><Info /></div>
         default:
-            return <Others src={src} />
+            return <div {...longPress}><Others src={src} /><Info /></div>
+    }
+}
+
+function LongPress(callback = () => { }, ms = 500) {
+    const timeRef = useRef(null);
+    const start = () => {
+        timeRef.current = setTimeout(callback, ms);
+    }
+    const clear = () => {
+        if (timeRef.current) {
+            clearTimeout(timeRef.current);
+            timeRef.current = null;
+        }
+    }
+    return {
+        onTouchStart: start,
+        onTouchEnd: clear,
+        onTouchMove: clear
     }
 }
 
@@ -53,7 +109,7 @@ function Cover({ src }) {
     }
     return <><div className="cover">
         <FaCloudDownloadAlt onClick={download} color="white" size={35} /><IoTrashBin onClick={trash} color="white" size={35} />
-    </div><Tooltip src={src}/></>
+    </div><Tooltip src={src} /></>
 }
 
 function Tooltip({ src }) {
