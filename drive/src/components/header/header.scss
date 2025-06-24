@@ -5,14 +5,17 @@ header {
         align-items: center;
         padding: 10px 30px;
         border-bottom: 1px solid grey;
-        h3{
-            letter-spacing:2px;
-            font-weight:500;
+
+        h3 {
+            letter-spacing: 2px;
+            font-weight: 500;
         }
+
         .searchBox {
             position: relative;
+
             .search {
-                background-color:var(--secondary-color);
+                background-color: var(--secondary-color);
                 color: #ADADAD;
                 padding: 10px 10px 10px 30px;
                 border-radius: 10px;
@@ -20,12 +23,11 @@ header {
                 width: 500px;
             }
 
-            img {
-                width: 22px;
+            .searchIcon {
                 position: absolute;
                 box-shadow: none;
                 left: 5px;
-                top: 5px;
+                top: 6px;
             }
         }
 
@@ -34,4 +36,27 @@ header {
             border-radius: 30px;
         }
     }
+}
+
+@media only screen and (max-width:600px) {
+    header {
+        nav {
+            flex-direction: column;
+
+            img {
+                display: none;
+            }
+
+            .searchBox {
+                img {
+                    display: block;
+                }
+
+                .search {
+                    width: 300px;
+                }
+            }
+        }
+    }
+
 }

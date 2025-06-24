@@ -34,6 +34,7 @@ aside {
 }
 
 section {
+    overflow-y: auto;
     flex: 5;
     background-color: var(--secondary-color);
     padding: 15px 0px;
@@ -54,10 +55,33 @@ section {
             font-weight: 500;
         }
     }
-    .body{
-        margin:15px;
+
+    .body {
+        padding-bottom: 20px;
+        margin: 15px;
         display: flex;
-        gap:15px;
         flex-wrap: wrap;
+        gap: 15px;
+        align-content: flex-start;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    main {
+        flex-direction: column;
+
+        aside {
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                margin: auto 15px;
+                padding: 0px;
+            }
+        }
+    }
+    section{
+        .body{
+            justify-content: space-around;
+        }
     }
 }

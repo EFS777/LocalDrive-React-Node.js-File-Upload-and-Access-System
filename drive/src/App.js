@@ -10,6 +10,7 @@ import { FaFolderClosed } from "react-icons/fa6";
 import { IoDocument } from "react-icons/io5";
 import axios from "axios";
 import { Categories } from "./components/categories/categories";
+import api from "./utils/api";
 
 export default function App() {
   var tabs = [
@@ -58,13 +59,13 @@ export default function App() {
   const fetch = async () => {
     try {
       let data = { type: tabs[tab].type }
-      var response = await axios.post('http://localhost:3001/getFiles', data, {
+      var response = await axios.post(api.getFiles, data, {
         headers: {
           'Content-Type': 'application/json'
         },
       })
       if (response.status === 200) {
-        OldData.current=response.data;
+        OldData.current = response.data;
         setFiles(response.data);
       }
 
@@ -75,14 +76,14 @@ export default function App() {
   useEffect(() => {
     fetch();
   }, [tab])
-  var OldData=useRef([]);
-  const Search=(e)=>{
-    let word=e.target.value;
-    if(word===""){
+  var OldData = useRef([]);
+  const Search = (e) => {
+    let word = e.target.value;
+    if (word === "") {
       setFiles(OldData.current);
       return;
     }
-    let filtered=files.filter((e)=>e.actualName.toLowerCase().includes(word.toLowerCase()));
+    let filtered = files.filter((e) => e.actualName.toLowerCase().includes(word.toLowerCase()));
     setFiles(filtered);
   }
 
@@ -97,11 +98,11 @@ export default function App() {
       <section>
         <div className="header">
           <h3>{tabs[tab].icon}&nbsp;&nbsp;{tabs[tab].name}</h3>
-          {tab === 0 && <Upload refresh={fetch}/>}
+          {tab === 0 && <Upload refresh={fetch} />}
         </div>
         <div className="body">
           {
-            files.map((item)=><Categories type={item.docType} key={item.name} src={item}/>)
+            files.map((item) => <Categories type={item.docType} key={item.name} src={item} />)
           }
         </div>
       </section>

@@ -6,8 +6,9 @@ import { PiCardsFill } from "react-icons/pi";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import Modal from "../modal/modal";
 import axios from "axios";
+import api from "../../utils/api";
 
-const url = "http://localhost:3001/files/";
+const url = api.files;
 
 const Categories = ({ type, src }) => {
     switch (type) {

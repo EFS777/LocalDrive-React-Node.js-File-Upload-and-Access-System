@@ -1,14 +1,15 @@
 import "./header.scss";
-import Images from "../../utils/images";
+import { IoSearch } from "react-icons/io5";
+import profile from "../../assets/profile.png"
 export default function Header({Search}) {
     return <header>
         <nav>
             <h3>Local Drive</h3>
             <div className="searchBox">
-                <img src={Images.search} alt="search" />
+                <IoSearch className="searchIcon" size={20} />
                 <input onChange={Search} className="search" placeholder="Search Drive" aria-label="Search Drive" />
             </div>
-            <img src={Images.profile} width={50} alt="profile" />
+            <img src={profile} width={50} alt="profile" />
         </nav>
     </header>
 }

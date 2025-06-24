@@ -1,0 +1,6 @@
+@echo off
+echo Starting Server...
+start cmd /k "cd server && node server.js"
+echo Starting drive...
+start cmd /k "cd drive && npm start"
+echo Drive is started
