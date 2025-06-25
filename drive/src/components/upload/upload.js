@@ -40,7 +40,7 @@ export default function Upload({refresh}) {
         }
     }
     return <Modal
-        trigger={<button className="addbutton" onClick={()=>setUploadPercent(0)} type="button">ADD</button>}
+        trigger={<button className="addbutton" onClick={()=>{setUploadPercent(0)}} type="button">ADD</button>}
         element={
             <div className="upload" onDrop={(e) => handleDrop(e, "drag")} onDragOver={(e) => e.preventDefault()}>
                 {uploadpercent > 0 ? <div style={{ textAlign: 'center' }}>
