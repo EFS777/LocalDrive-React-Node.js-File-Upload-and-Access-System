@@ -36,6 +36,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use('/files', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, '../drive/build')));
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -68,7 +69,7 @@ let storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'));
+  res.sendFile(path.join(__dirname, '../drive/build','index.html'));
 });
 
 
