@@ -20,7 +20,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
+    .type {
+        position: absolute;
+        color: black;
+        text-transform: uppercase;
+        top: 30px;
+    }
     .cover,
     .tooltip {
         display: none;
@@ -35,6 +40,7 @@
     .cover {
         position: absolute;
         top: 0px;
+        left: 0px;
         width: 100px;
         height: 120px;
         background-color: #80808066;
@@ -54,21 +60,32 @@
 
     .tooltip {
         display: block;
-        left: 20px;
+        left: 0px;
         top: -70px;
         box-shadow: 0px 0px 7px 2px grey;
         position: absolute;
-        max-width: 400px;
+        height: 85px;
+        width: 250px;
         padding: 10px;
         border-radius: 5px;
         background-color: black;
         z-index: 2;
+        font-size: 13px;
 
-        h6 {
+        dt {
+            margin-bottom: 5px;
+        }
+
+        dl {
+            margin-top: 0px;
+        }
+
+        dd {
             white-space: normal;
             word-wrap: break-word;
             overflow-wrap: break-word;
-            font-size: 13px;
+            margin: 0px;
+            font-size: 14px;
         }
     }
 }
@@ -92,17 +109,20 @@
     .c_video:hover,
     .c_audio:hover,
     .c_Others:hover {
+
         .cover,
         .tooltip {
             display: none;
         }
     }
-    .Cards{
-        background-color:var(--secondary-color);
-        padding:10px;
-        border-radius:10px;
-        span{
-            margin-top:10px;
+
+    .Cards {
+        background-color: var(--secondary-color);
+        padding: 10px;
+        border-radius: 10px;
+
+        span {
+            margin-top: 10px;
             display: flex;
             justify-content: space-evenly;
         }
