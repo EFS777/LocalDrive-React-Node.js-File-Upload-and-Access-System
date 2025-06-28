@@ -11,46 +11,18 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-
-    .m_close {
-        display: none;
-    }
-
     .modal-body {
         position: relative;
         //background-color: var(--primary-color);
         border-radius: 10px;
         display: flex;
         justify-content: center;
+        padding:15px;
         align-items: center;
-        width: 50%;
-        height: 40%;
-
-        .d_close {
-            position: absolute;
-            top: 3px;
-            right: 3px;
-        }
-
-
     }
-}
-
-
-@media only screen and (max-width:600px) {
-    .modal {
-        .m_close {
-            display: block;
-            position: absolute;
-            top: 10px;
-            right:10px;
-        }
-
-        .modal-body {
-            width:80%;
-            .d_close {
-                display: none;
-            }
-        }
+    .close{
+        position: absolute;
+        top:5px;
+        right:5px;
     }
 }

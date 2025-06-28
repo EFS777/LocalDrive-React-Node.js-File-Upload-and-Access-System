@@ -31,7 +31,11 @@
         display: none;
     }
 }
-
+.c_documents{
+    img{
+        overflow: clip;
+    }
+}
 .c_images:hover,
 .c_documents:hover,
 .c_video:hover,
@@ -94,12 +98,14 @@
     img {
         object-fit: contain;
         width: 100px;
+        height: 100px;
     }
 }
 
 .actualImage {
     object-fit: contain;
     width: 500px;
+    height: 500px;
 }
 
 @media only screen and (max-width:600px) {
