@@ -15,24 +15,24 @@ Features
 
   Commands
 # Clone the repository
-git clone https://github.com/EFS777/LocalDrive-React-Node.js-File-Upload-and-Access-System.git
+git clone https://github.com/EFS777/LocalDrive-React-Node.js-File-Upload-and-Access-System.git, 
 cd LocalDrive-React-Node.js-File-Upload-and-Access-System
 
 # Backend setup
-cd server
-npm install
+cd server, 
+npm install, 
 node server.js
 
 # Frontend setup
-cd drive
-npm install
+cd drive, 
+npm install, 
 npm start
 
 # Database
-name:drive
+name:drive, 
 collection:filesinfo
 
 For using the application
-npm run build in frontend Directory
-node server.js in backend directory
+npm run build in frontend Directory, 
+node server.js in backend directory, 
 run drive.bat by clicking it
