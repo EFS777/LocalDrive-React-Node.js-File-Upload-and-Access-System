@@ -4,6 +4,8 @@ main {
     max-height: 90vh;
 }
 
+
+
 aside {
     flex: 1;
     background-color: var(--secondary-color);
@@ -11,6 +13,16 @@ aside {
     margin: 15px;
     border-radius: 15px;
     width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .serverIp {
+        width: -webkit-fill-available;
+        font-size: small;
+        text-align: center;
+        padding: 10px;
+    }
 
     li {
         padding: 10px;
@@ -72,6 +84,7 @@ section {
 
         aside {
             flex: none;
+
             ul {
                 display: flex;
                 justify-content: space-around;

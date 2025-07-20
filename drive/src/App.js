@@ -61,7 +61,6 @@ export default function App() {
       await fetch("url.json?v=" + new Date().getTime())
         .then((e) => e.json())
         .then(async(d) => {
-          console.log(d.url)
           localStorage.setItem("baseUrl", d.url);
           let data = { type: tabs[tab].type }
           var response = await axios.post(api.getFiles, data, {
@@ -94,11 +93,13 @@ export default function App() {
 
   return <>
     <Header Search={Search} />
+    
     <main>
       <aside>
         <ul style={{ listStyle: "none" }}>
           {tabs.map((item, i) => <li onClick={() => setTab(i)} className={i === tab ? "active" : ""} key={item.name}>{item.icon}&nbsp;&nbsp;{item.name}</li>)}
         </ul>
+        <div className="serverIp">Site is available on : {localStorage.getItem("baseUrl")}</div>
       </aside>
       <section>
         <div className="header">
