@@ -56,25 +56,30 @@ export default function App() {
   const [files, setFiles] = useState([]);
 
 
-  const fetch = async () => {
+  const fetcher = async () => {
     try {
-      let data = { type: tabs[tab].type }
-      var response = await axios.post(api.getFiles, data, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      })
-      if (response.status === 200) {
-        OldData.current = response.data;
-        setFiles(response.data);
-      }
-
+      await fetch("url.json?v=" + new Date().getTime())
+        .then((e) => e.json())
+        .then(async(d) => {
+          console.log(d.url)
+          localStorage.setItem("baseUrl", d.url);
+          let data = { type: tabs[tab].type }
+          var response = await axios.post(api.getFiles, data, {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          })
+          if (response.status === 200) {
+            OldData.current = response.data;
+            setFiles(response.data);
+          }
+        })
     } catch (e) {
       alert("Something went wrong");
     }
   }
   useEffect(() => {
-    fetch();
+    fetcher();
   }, [tab])
   var OldData = useRef([]);
   const Search = (e) => {

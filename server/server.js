@@ -6,9 +6,9 @@ const cors = require('cors');
 const multer = require('multer');
 const { getDb } = require('./mongoDB');
 const { ObjectId } = require('mongodb');
+const {getLocalIp_assign}=require('./ipAssigner');
 const fs = require('fs');
 const path = require('path');
-const { error } = require('console');
 app.use(cors());
 const port = 3001;
 
@@ -113,4 +113,7 @@ app.delete('/delete/:id/:name', async (req, res) => {
     res.end();
   }
 })
-app.listen(port, () => console.log("Server started at port:", port))
+app.listen(port, () => {
+  getLocalIp_assign();
+  console.log("Server started at port:", port);
+})

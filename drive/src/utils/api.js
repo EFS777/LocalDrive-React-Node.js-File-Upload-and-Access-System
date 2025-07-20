@@ -1,4 +1,4 @@
-const url="http://192.168.0.7:3001/";
+var url=localStorage.getItem("baseUrl");
 
 const api={
     getFiles:url+"getFiles",
