@@ -104,7 +104,7 @@ export default function App() {
       <section>
         <div className="header">
           <h3>{tabs[tab].icon}&nbsp;&nbsp;{tabs[tab].name}</h3>
-          {tab === 0 && <Upload refresh={fetch} />}
+          {tab === 0 && <Upload refresh={fetcher} />}
         </div>
         <div className="body">
           {

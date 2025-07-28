@@ -6,7 +6,7 @@ const cors = require('cors');
 const multer = require('multer');
 const { getDb } = require('./mongoDB');
 const { ObjectId } = require('mongodb');
-const {getLocalIp_assign}=require('./ipAssigner');
+const { getLocalIp_assign } = require('./ipAssigner');
 const fs = require('fs');
 const path = require('path');
 app.use(cors());
@@ -43,25 +43,9 @@ let storage = multer.diskStorage({
     cb(null, './uploads');
   },
   filename: async (req, file, cb) => {
-    let createdOn = new Date().toISOString().split('.')[0] + 'Z';
-    let data = req?.body;
     let type = file.originalname.split(".");
-    let actualName = file.originalname;    
-    //let fileSize=(req?.file.size/1024).toFixed(2).toString()+"KB";
     type = type[type.length - 1];
     let name = Date.now() + "." + type;
-    let record = {
-      name,
-      path: data.path,
-      createdOn,
-      docType: DocType(type),
-      actualName,
-      type,
-      //fileSize
-    }
-
-    var db = await getDb();
-    await db.collection('filesinfo').insertOne(record);
     cb(null, name);
   }
 });
@@ -69,7 +53,7 @@ let storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, '../drive/build','index.html'));
+  res.sendFile(path.join(__dirname, '../drive/build', 'index.html'));
 });
 
 
@@ -86,8 +70,37 @@ app.post("/getFiles", async (req, res) => {
   }
 })
 
-app.post('/upload', upload.array('uploaded_file', 10), (req, res) => {
-  res.end();
+app.post('/upload', upload.array('uploaded_file', 10), async (req, res) => {  
+  if (!req.files || !req.files.length) {
+    return res.status(400).json({ error: "NO files uploaded" });
+  }
+  try {
+    let createdOn = new Date().toISOString().split('.')[0] + 'Z';
+    const records = req.files.map(file => {
+      let type = file.originalname.split(".");
+      let actualName = file.originalname;
+      let fileSize = (file.size / 1024).toFixed(2).toString() + "KB";
+      type = type[type.length - 1];
+      return {
+        name:file.filename,
+        path: file.path,
+        createdOn,
+        docType: DocType(type),
+        actualName,
+        type,
+        fileSize
+      }
+    });
+    var db = await getDb();
+    await db.collection('filesinfo').insertMany(records);
+    res.status(200).json({message:"Files uploaded succesfully"});
+    res.end();
+  }catch(e){
+    res.status(400).json({ error: e });
+    res.end();
+  }
+
+
 });
 
 app.delete('/delete/:id/:name', async (req, res) => {

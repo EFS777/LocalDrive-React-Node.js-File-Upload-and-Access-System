@@ -13,12 +13,15 @@ export default function Upload({refresh}) {
         const droppedFile = type === "upload" ? e.target.files : e.dataTransfer.files;
         if (droppedFile.length > 0) {
             const newFiles = Array.from(droppedFile);
-            console.log(newFiles);
             uploadData(newFiles)
         }
     }
 
     const uploadData = async (file) => {
+        if(file.length>10){
+            alert("Cannot upload more then 10 files");
+            return;
+        }
         const formData = new FormData();
         formData.append("path", "/");
         file.map((files) => formData.append('uploaded_file', files));
@@ -32,10 +35,13 @@ export default function Upload({refresh}) {
                     setUploadPercent(percent);
                 }
             });
+            console.log(response);
+            
             if(response.status===200){
                 refresh();
             }
         } catch (e) {
+            setUploadPercent(0);
             alert("Upload Failed");
         }
     }

@@ -118,10 +118,16 @@ function Tooltip({ src }) {
             <dt>Name</dt>
             <dd>{src.actualName}</dd>
         </dl>
-        <dl>
-            <dt>Created Date</dt>
-            <dd>{src.createdOn.split("T")[0]}</dd>
-        </dl>
+        <div style={{display:"flex",justifyContent:"space-evenly"}}>
+            <dl>
+                <dt>Created Date</dt>
+                <dd>{src.createdOn.split("T")[0]}</dd>
+            </dl>
+            <dl>
+                <dt>Size</dt>
+                <dd>{src.fileSize}</dd>
+            </dl>
+        </div>
     </div>
 }
 
@@ -135,13 +141,13 @@ function Images({ src }) {
 
 function Documents({ src }) {
     function openPDF() {
-    window.open(url + src.name, '_blank');
-  }
+        window.open(url + src.name, '_blank');
+    }
     return <div className="c_documents">
         <IoDocumentSharp size={100} />
         <h6>{src.actualName}</h6>
         <h4 className="type">{src.type}</h4>
-        <span onClick={()=>openPDF()}><Cover src={src}/></span>
+        <span onClick={() => openPDF()}><Cover src={src} /></span>
     </div>
 }
 
